@@ -6,7 +6,9 @@ var backgroundColor = 0xb466cc;
 
 var graphics;
 
-var planets;
+var planets = new Array();
+
+var planetsCount = 1;
 
 function preload() {
 }
@@ -14,13 +16,22 @@ function preload() {
 function create() {
   graphics = game.add.graphics(0, 0);
 
+  initPlanets();
+
   drawBackground();
+
+}
+
+function initPlanets() {
+  for (var i = 0; i < planetsCount; i++) {
+    planets[i] = new Planet();
+  }
 }
 
 function drawBackground() {
   game.stage.backgroundColor = backgroundColor;
   drawSun();
-  drawPlanet();
+  drawPlanets();
 }
 
 function drawSun() {
@@ -30,10 +41,13 @@ function drawSun() {
   graphics.endFill();
 }
 
-function drawPlanet() {
-  var radius = game.world.width / 12;
-  graphics.beginFill(planetColor);
-  graphics.drawEllipse(game.world.width / 8, game.world.centerY, radius, radius);
+function drawPlanets() {
+  for (var i = 0; i < planets.length; i++) {
+    planet = planets[i]
+    graphics.beginFill(planet.color);
+    graphics.drawEllipse(planet.x, planet.y, planet.radius, planet.radius);
+    graphics.endFill();
+  }
 }
 
 function update() {
@@ -52,3 +66,9 @@ Ship = function(index, game, player) {
   this.player = player;
 }
 
+Planet = function() {
+  this.color = planetColor;
+  this.x = game.world.width / 8;
+  this.y = game.world.centerY;
+  this.radius = game.world.width / 12;
+}
