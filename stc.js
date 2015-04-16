@@ -37,6 +37,8 @@ function initStarterSystem() {
   this.starColor = 0xffd900;
   this.planetColor = 0x1ED47C;
   this.stationColor = 0x67CAFF;
+
+  this.starRadius = game.world.height / 2;
   var traderCount = 10;
   for (var i = 0; i < traderCount; i++) {
     this.ships = new Ship('ship', game, globalPlayer);
@@ -52,9 +54,12 @@ function drawBackground(system) {
 }
 
 function drawStar(system) {
-  var radius = game.world.height / 2 ;
   graphics.beginFill(system.starColor);
-  graphics.drawEllipse(game.world.width + radius / 2, game.world.centerY, radius, radius);
+  var starCoords = system.starCoords();
+  graphics.drawEllipse(starCoords[0], starCoords[1], system.starRadius, system.starRadius);
+  graphics.endFill();
+  graphics.beginFill(0xffffff);
+  graphics.drawEllipse(system.entryPoint()[0], system.entryPoint()[1], 10,10);
   graphics.endFill();
 }
 
@@ -127,6 +132,10 @@ System = function(index, initFunction, game) {
 }
 
 System.prototype.entryPoint = function() {
-  return [game.world.centerX, game.world.centerY];
+  return [this.starCoords()[0] - this.starRadius * 1.1, this.starCoords()[1]];
 }
 
+System.prototype.starCoords = function()
+{
+  return [game.world.width + this.starRadius / 2, game.world.centerY];
+}
