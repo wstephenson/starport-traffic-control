@@ -8,7 +8,10 @@ var globalPlanetsCount = 1;
 
 var globalPlayer;
 
+var testShip;
+
 function preload() {
+  game.load.image('ship', 'assets/sprites/ship.png');
 }
 
 function create() {
@@ -23,10 +26,12 @@ function create() {
   }
   
   drawBackground(globalSystems[0]);
+  testShip = game.add.sprite(globalSystems[0].entryPoint()[0], globalSystems[0].entryPoint()[1], 'ship');
+  testShip.anchor.setTo(0.5, 0.5);
 }
 
 function update() {
-    
+  testShip.angle++;
 }
 
 // SETUP
@@ -58,9 +63,9 @@ function drawStar(system) {
   var starCoords = system.starCoords();
   graphics.drawEllipse(starCoords[0], starCoords[1], system.starRadius, system.starRadius);
   graphics.endFill();
-  graphics.beginFill(0xffffff);
-  graphics.drawEllipse(system.entryPoint()[0], system.entryPoint()[1], 10,10);
-  graphics.endFill();
+  //graphics.beginFill(0xffffff);
+  //graphics.drawEllipse(system.entryPoint()[0], system.entryPoint()[1], 10,10);
+  //graphics.endFill();
 }
 
 function drawPlanets(system) {
