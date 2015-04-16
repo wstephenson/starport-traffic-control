@@ -81,7 +81,10 @@ function drawStations(planet) {
   for (var j = 0; j < planet.stations.length; j++) {
     station = planet.stations[j];
     graphics.beginFill(planet.system.stationColor);
-    graphics.drawEllipse(planet.x + planet.radius * station.orbitFactor, planet.y, planet.radius / 10 , planet.radius / 10);
+    var stationX = planet.x + planet.radius * station.orbitFactor;
+    var stationY = planet.y;
+    var stationSideLength = planet.radius / 5;
+    graphics.drawRect(stationX - stationSideLength / 2, stationY - stationSideLength / 2, stationSideLength, stationSideLength);
     graphics.endFill();
   } 
 }
