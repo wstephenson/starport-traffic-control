@@ -126,3 +126,7 @@ System = function(index, initFunction, game) {
   this.ships = new Array();
 }
 
+System.prototype.entryPoint = function() {
+  return [game.world.centerX, game.world.centerY];
+}
+
