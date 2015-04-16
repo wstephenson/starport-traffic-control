@@ -34,7 +34,7 @@ function update() {
 function initStarterSystem() {
   initPlanets(this);  
   this.backgroundColor = 0xb466cc;
-  this.sunColor = 0xffd900;
+  this.starColor = 0xffd900;
   this.planetColor = 0x1ED47C;
   this.stationColor = 0x67CAFF;
   var traderCount = 10;
@@ -47,13 +47,13 @@ function initStarterSystem() {
 
 function drawBackground(system) {
   game.stage.backgroundColor = system.backgroundColor;
-  drawSun(system);
+  drawStar(system);
   drawPlanets(system);
 }
 
-function drawSun(system) {
+function drawStar(system) {
   var radius = game.world.height / 2 ;
-  graphics.beginFill(system.sunColor);
+  graphics.beginFill(system.starColor);
   graphics.drawEllipse(game.world.width + radius / 2, game.world.centerY, radius, radius);
   graphics.endFill();
 }
