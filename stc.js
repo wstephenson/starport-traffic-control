@@ -23,15 +23,6 @@ function create() {
   }
   
   drawBackground(globalSystems[0]);
-
-  // set up traders for level
-  // define level - 
-  // level == star system
-  // level objective: function checking victory condition
-  //   victory conditions - time based, score based, kill based, prevent stat exceeding limit.
-  // write things statically for one level and then replace with dynamic levels
-  
-  
 }
 
 function update() {
