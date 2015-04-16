@@ -9,9 +9,11 @@ var globalPlanetsCount = 1;
 var globalPlayer;
 
 var testShip;
+var testStation;
 
 function preload() {
   game.load.image('ship', 'assets/sprites/ship.png');
+  game.load.image('station', 'assets/sprites/coriolis.png');
 }
 
 function create() {
@@ -83,12 +85,14 @@ function drawPlanets(system) {
 function drawStations(planet) {
   for (var j = 0; j < planet.stations.length; j++) {
     station = planet.stations[j];
-    graphics.beginFill(planet.system.stationColor);
     var stationX = planet.x + planet.radius * station.orbitFactor;
     var stationY = planet.y;
     var stationSideLength = planet.radius / 5;
-    graphics.drawRect(stationX - stationSideLength / 2, stationY - stationSideLength / 2, stationSideLength, stationSideLength);
-    graphics.endFill();
+    graphics.beginFill(planet.system.stationColor);
+    //graphics.drawRect(stationX - stationSideLength / 2, stationY - stationSideLength / 2, stationSideLength, stationSideLength);
+    //graphics.endFill();
+    testStation = game.add.image(stationX, stationY, 'station');
+    testStation.anchor.setTo(0.5, 0.5);
   } 
 }
 
