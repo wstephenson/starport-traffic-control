@@ -19,7 +19,7 @@ function create() {
   globalSystems[0] = new System('starter', initStarterSystem, game);
   
   for (var i = 0; i < globalSystems.length; i ++) {
-    globalSystems[0].initFunction(globalSystems[0])
+    globalSystems[0].initFunction()
   }
   
   drawBackground(globalSystems[0]);
@@ -38,15 +38,17 @@ function update() {
     
 }
 
-function initStarterSystem(system) {
-  initPlanets(system);  
-  system.backgroundColor = 0xb466cc;
-  system.sunColor = 0xffd900;
-  system.planetColor = 0x1ED47C;
-  system.stationColor = 0x67CAFF;
+// SETUP
+
+function initStarterSystem() {
+  initPlanets(this);  
+  this.backgroundColor = 0xb466cc;
+  this.sunColor = 0xffd900;
+  this.planetColor = 0x1ED47C;
+  this.stationColor = 0x67CAFF;
   var traderCount = 10;
   for (var i = 0; i < traderCount; i++) {
-    system.ships = new Ship('ship', game, globalPlayer);
+    this.ships = new Ship('ship', game, globalPlayer);
   }
 }
 
