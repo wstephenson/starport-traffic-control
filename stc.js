@@ -22,8 +22,6 @@ function create() {
     globalSystems[0].initFunction(globalSystems[0])
   }
   
-  //initPlanets();
-
   drawBackground(globalSystems[0]);
 
   // set up traders for level
@@ -46,6 +44,10 @@ function initStarterSystem(system) {
   system.sunColor = 0xffd900;
   system.planetColor = 0x1ED47C;
   system.stationColor = 0x67CAFF;
+  var traderCount = 10;
+  for (var i = 0; i < traderCount; i++) {
+    system.ships = new Ship('ship', game, globalPlayer);
+  }
 }
 
 // 'LIBRARY' - VIEW
@@ -70,14 +72,18 @@ function drawPlanets(system) {
     graphics.beginFill(system.planetColor);
     graphics.drawEllipse(planet.x, planet.y, planet.radius, planet.radius);
     graphics.endFill();
-    // draw stations
-    for (var j = 0; j < planet.stations.length; j++) {
-      station = planet.stations[j];
-      graphics.beginFill(system.stationColor);
-      graphics.drawEllipse(planet.x + planet.radius * station.orbitFactor, planet.y, planet.radius / 10 , planet.radius / 10);
-      graphics.endFill();
-    } 
+    
+    drawStations(planet);
   }
+}
+
+function drawStations(planet) {
+  for (var j = 0; j < planet.stations.length; j++) {
+    station = planet.stations[j];
+    graphics.beginFill(planet.system.stationColor);
+    graphics.drawEllipse(planet.x + planet.radius * station.orbitFactor, planet.y, planet.radius / 10 , planet.radius / 10);
+    graphics.endFill();
+  } 
 }
 
 // 'LIBRARY' - MODEL
@@ -85,7 +91,7 @@ function drawPlanets(system) {
 function initPlanets(system) {
   system.planets = new Array();
   for (var i = 0; i < globalPlanetsCount; i++) {
-    system.planets[i] = new Planet();
+    system.planets[i] = new Planet(system);
   }
 }
 
@@ -109,10 +115,11 @@ Station = function(index, planet, game, player) {
   this.orbitFactor = 1.3;
 }
     
-Planet = function() {
+Planet = function(system) {
   this.x = game.world.width / 8;
   this.y = game.world.centerY;
   this.radius = game.world.width / 12;
+  this.system = system;
   this.stations = new Array();
   this.stations[0] = new Station('cori', this, game, globalPlayer); 
 }
@@ -120,5 +127,6 @@ Planet = function() {
 System = function(index, initFunction, game) {
   this.name = index.toString();
   this.initFunction = initFunction;
+  this.ships = new Array();
 }
 
