@@ -48,7 +48,7 @@ function initStarterSystem() {
   this.starRadius = game.world.height / 2;
   var traderCount = 10;
   for (var i = 0; i < traderCount; i++) {
-    this.ships = new Ship('ship', game, globalPlayer);
+    this.ships = new Unit('ship', game, globalPlayer);
   }
 }
 
@@ -111,7 +111,7 @@ Player = function(index, game) {
   this.score = 0;
 }
   
-Ship = function(index, game, player) {
+Unit = function(index, game, player) {
   this.name = index.toString();
   this.game = game;
   this.player = player;
