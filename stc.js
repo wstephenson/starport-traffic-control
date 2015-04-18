@@ -105,17 +105,53 @@ function initPlanets(system) {
   }
 }
 
+RoleEnum = {
+  BLIP: 1,
+  TRADER: 2,
+  PIRATE: 3,
+  POLICE: 4
+}
+  
 Player = function(index, game) {
   this.game = game;
   this.name = index.toString();
   this.score = 0;
 }
   
-Unit = function(index, game, player) {
+// base for all ships
+Unit = function(index, player) {
   this.name = index.toString();
-  this.game = game;
   this.player = player;
 }
+
+// Trader class
+function Trader(player) {
+  Unit.call(this, 'trader', player);
+  // TODO: add value
+}
+
+Trader.prototype = Object.create(Unit.prototype);
+
+Trader.prototype.constructor = Trader;
+
+// Pirate class
+function Pirate(player) {
+  Unit.call(this, 'pirate', player);
+}
+
+Pirate.prototype = Object.create(Unit.prototype);
+
+Pirate.prototype.constructor = Pirate;
+  
+// Police class
+function Police(player) {
+  Unit.call(this, 'police', player);
+}
+
+Police.prototype = Object.create(Unit.prototype);
+
+Police.prototype.constructor = Police;
+  
 
 Station = function(index, planet, game, player) {
   this.name = index.toString();
